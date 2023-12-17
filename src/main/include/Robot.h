@@ -5,6 +5,11 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
+#include "Code_Gen_Model_ert_rtw/Code_Gen_Model.h"  // This line is for the Simulink code
+#include <frc/SmartDashboard/smartdashboard.h>  // This line is for the Smart Dashboard to Simulink input port
+#include <networktables/NetworkTable.h>         // This line is for the Smart Dashboard to Simulink input port
+#include <networktables/NetworkTableInstance.h> // This line is for the Smart Dashboard to Simulink input port
+#include "include/SimulinkSmartDashboard.h"     // This line is to support tunable parameters from Simulink
 
 class Robot : public frc::TimedRobot {
  public:
@@ -25,4 +30,10 @@ class Robot : public frc::TimedRobot {
 
   void SimulationInit() override;
   void SimulationPeriodic() override;
+
+private:
+  void PreStep();
+  void PostStep();
+  nt::NetworkTableEntry Entry;
+  SimulinkSmartDashboard m_TunableSmartDashboard;   // This line is to support tunable parameters from Simulink
 };
